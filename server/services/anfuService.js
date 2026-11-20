@@ -153,12 +153,16 @@ const anfuService = {
     const settings = getSettings();
     if (!settings.anfuToken) {
       console.warn('ANFU_TOKEN belum dikonfigurasi. Simulasi pemesanan ANFU.');
+      const isActivationLink = productId === 'prod-04846726' || String(productId).toLowerCase().includes('google');
+      const activationUrl = `https://support.google.com/googleone/promo/activate?token=EKE-${Date.now().toString(36).toUpperCase()}`;
+      
       return {
         simulated: true,
         message: 'Order dicatat. Harap isi ANFU_TOKEN di pengaturan untuk auto-debit saldo ANFU.',
         status: 'paid',
-        licenseKey: `EKE-${Date.now().toString(36).toUpperCase()}-STANDALONE`,
-        downloadUrl: `https://drive.google.com/drive/folders/eke-digital-access`,
+        supplierDeliveredKey: isActivationLink ? activationUrl : null,
+        licenseKey: isActivationLink ? activationUrl : `EKE-${Date.now().toString(36).toUpperCase()}-STANDALONE`,
+        downloadUrl: isActivationLink ? activationUrl : `https://drive.google.com/drive/folders/eke-digital-access`,
       };
     }
 

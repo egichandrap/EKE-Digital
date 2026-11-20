@@ -205,12 +205,29 @@ export default function SuccessModal() {
                   className="py-2.5 px-4 rounded-xl bg-[#b22204] hover:bg-[#941901] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer shadow-xs"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
-                  <span>Buka Tautan Akses</span>
+                  <span>Buka Tautan Aktivasi</span>
                 </a>
               )}
             </div>
 
           </div>
+
+          {/* Panduan & Langkah Aktivasi dari Upstream */}
+          {((activeOrder.fulfillment?.instructions && activeOrder.fulfillment.instructions.length > 0) ||
+            (activeOrder.instructions && activeOrder.instructions.length > 0)) && (
+            <div className="p-4 rounded-2xl bg-[#f0f3ff] border border-[#dee8ff] text-xs space-y-2">
+              <span className="font-bold text-[#111c2d] flex items-center gap-1.5">
+                <span>📋</span> Langkah & Panduan Aktivasi:
+              </span>
+              <ol className="list-decimal list-inside space-y-1.5 text-[#5b403b] pl-1 font-medium text-[11px]">
+                {(activeOrder.fulfillment?.instructions || activeOrder.instructions).map((step, idx) => (
+                  <li key={idx} className="leading-relaxed">
+                    {step}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
 
           {/* Instructions note */}
           <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/60 text-xs text-amber-900 space-y-1">

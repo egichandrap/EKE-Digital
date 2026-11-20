@@ -10,25 +10,36 @@ const CACHE_TTL_MS = 30000; // 30 seconds ensures live mirroring of any new ANFU
  */
 function applyMarkup(price, percent = 35) {
   if (!price || typeof price !== 'number' || isNaN(price)) return price;
-  const marked = price * (1 + percent / 100);
+  const marked = Math.round(price * (1 + percent / 100));
   return Math.ceil(marked / 100) * 100;
 }
 
 /**
- * Transform ANFU product to EKE Digital product with 35% markup applied
+ * Transform ANFU product to EKE Digital product with 35% markup applied to selling price only.
+ * CATATAN PENTING:
+ * - Harga normal (originalPrice / harga coret) TETAP PERSIS SAMA dengan ANFU Store (tidak di-markup)
+ * - Hanya harga jual (price) dan opsi lisensi yang di-markup 35% dari modal ANFU.
  */
 function transformProduct(p, markupPercent) {
-  const originalPrice = p.originalPrice ? applyMarkup(p.originalPrice, markupPercent) : null;
+  // Harga normal tetap persis sama seperti di ANFU Store (e.g. Netflix 186.000, unedited)
+  const originalPrice = (p.originalPrice && typeof p.originalPrice === 'number')
+    ? p.originalPrice
+    : null;
   const markedUpPrice = applyMarkup(p.price, markupPercent);
 
-  // Transform license options
+  // Hitung ulang persentase hemat/diskon berdasarkan harga normal asli vs harga jual baru
+  const discountPercentage = (originalPrice && originalPrice > markedUpPrice)
+    ? Math.round(((originalPrice - markedUpPrice) / originalPrice) * 100)
+    : 0;
+
+  // Transform license options: hanya harga jual yang di-markup
   const licenseOptions = {};
   if (p.licenseOptions) {
     for (const [key, val] of Object.entries(p.licenseOptions)) {
       licenseOptions[key] = {
         ...val,
         price: applyMarkup(val.price, markupPercent),
-        costPrice: val.price, // Keep original as cost price
+        costPrice: val.price, // Keep original ANFU modal as cost price
       };
     }
   }
@@ -37,7 +48,8 @@ function transformProduct(p, markupPercent) {
     ...p,
     costPrice: p.price, // ANFU modal price
     price: markedUpPrice,
-    originalPrice: originalPrice || Math.round(markedUpPrice * 1.5),
+    originalPrice: originalPrice,
+    discountPercentage: discountPercentage,
     licenseOptions: Object.keys(licenseOptions).length > 0 ? licenseOptions : {
       personal: { name: 'Lisensi Standar', price: markedUpPrice, description: 'Penggunaan penuh untuk produk digital ini.' },
       agency: { name: 'Lisensi Komersial', price: markedUpPrice, description: 'Penggunaan penuh untuk produk digital ini.' }

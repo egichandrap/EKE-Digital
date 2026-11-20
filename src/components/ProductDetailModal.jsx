@@ -184,9 +184,16 @@ export default function ProductDetailModal() {
         <div className="p-4 sm:p-5 bg-white border-t border-[#f0f3ff] flex items-center justify-between gap-4">
           <div>
             <span className="text-[11px] text-[#8f7069] block font-medium">Total Harga</span>
-            <span className="text-xl font-black text-[#b22204]">
-              {formatRupiah(currentPrice)}
-            </span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-xl font-black text-[#b22204]">
+                {formatRupiah(currentPrice)}
+              </span>
+              {activeProduct.originalPrice && activeProduct.originalPrice > currentPrice && (
+                <span className="text-xs text-[#8f7069] line-through">
+                  {formatRupiah(activeProduct.originalPrice)}
+                </span>
+              )}
+            </div>
           </div>
 
           <button

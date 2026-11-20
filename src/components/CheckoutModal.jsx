@@ -81,9 +81,16 @@ export default function CheckoutModal() {
             <span className="text-[10px] text-[#5b403b] block">
               {selectedLicenseType === 'agency' ? 'Lisensi Komersial' : 'Lisensi Standar'}
             </span>
-            <span className="text-sm font-black text-[#b22204]">
-              {formatRupiah(finalPrice)}
-            </span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-sm font-black text-[#b22204]">
+                {formatRupiah(finalPrice)}
+              </span>
+              {activeProduct.originalPrice && activeProduct.originalPrice > finalPrice && (
+                <span className="text-[10px] text-[#8f7069] line-through">
+                  {formatRupiah(activeProduct.originalPrice)}
+                </span>
+              )}
+            </div>
           </div>
         </div>
 

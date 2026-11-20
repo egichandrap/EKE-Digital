@@ -8,7 +8,9 @@ export default function ProductCard({ product }) {
 
   // Price is already marked up by 35% on the server
   const formattedPrice = formatRupiah(product.price);
-  const formattedOriginal = product.originalPrice ? formatRupiah(product.originalPrice) : null;
+  const formattedOriginal = (product.originalPrice && product.originalPrice > product.price)
+    ? formatRupiah(product.originalPrice)
+    : null;
 
   return (
     <div className="group bg-white rounded-2xl border border-[#f0f3ff] hover:border-[#ffdad3] shadow-xs hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden hover:-translate-y-1">

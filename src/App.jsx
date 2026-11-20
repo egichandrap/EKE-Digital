@@ -9,7 +9,6 @@ import CheckoutModal from './components/CheckoutModal';
 import PaymentModal from './components/PaymentModal';
 import SuccessModal from './components/SuccessModal';
 import OrderTrackingModal from './components/OrderTrackingModal';
-import AdminModal from './components/AdminModal';
 import Footer from './components/Footer';
 import { AlertCircle, RefreshCw } from 'lucide-react';
 
@@ -139,7 +138,6 @@ function StoreApp() {
       <PaymentModal />
       <SuccessModal />
       <OrderTrackingModal />
-      <AdminModal />
 
       {/* Footer */}
       <Footer />

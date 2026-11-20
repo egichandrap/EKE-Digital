@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from '../context/StoreContext';
-import { Search, ShoppingBag, ShieldCheck, RefreshCw, Settings, SearchCode } from 'lucide-react';
+import { Search, SearchCode, RefreshCw } from 'lucide-react';
 
 export default function Navbar() {
   const {
@@ -8,7 +8,6 @@ export default function Navbar() {
     searchQuery,
     setSearchQuery,
     setIsTrackingOpen,
-    setIsAdminOpen,
     loadInitialData,
     loading
   } = useStore();
@@ -76,15 +75,6 @@ export default function Navbar() {
             >
               <SearchCode className="w-4 h-4 text-[#b22204]" />
               <span className="hidden sm:inline">Lacak Pesanan</span>
-            </button>
-
-            {/* Admin Panel Link */}
-            <button
-              onClick={() => setIsAdminOpen(true)}
-              className="p-2 rounded-xl text-[#5b403b] hover:text-[#111c2d] hover:bg-[#f0f3ff] transition-colors"
-              title="Pengaturan Admin & Gateway"
-            >
-              <Settings className="w-4 h-4" />
             </button>
           </div>
 

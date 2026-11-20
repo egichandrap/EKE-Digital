@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { PORT, getSettings, updateSettings } = require('./config');
+const { PORT, getSettings } = require('./config');
 const db = require('./db');
 const anfuService = require('./services/anfuService');
 const autogopayService = require('./services/autogopayService');
@@ -30,8 +30,6 @@ app.get('/api/settings', (req, res) => {
       tagline: settings.tagline,
       waNumber: settings.waNumber,
       markupPercent: settings.markupPercent,
-      hasAutogopay: Boolean(settings.autogopayApiKey),
-      hasAnfuToken: Boolean(settings.anfuToken),
     }
   });
 });
@@ -327,42 +325,7 @@ async function executeFulfillment(order) {
 }
 
 // ==========================================
-// 4. ADMIN & MANAGEMENT ENDPOINTS
-// ==========================================
-
-app.get('/api/admin/orders', (req, res) => {
-  res.json({ success: true, data: db.getOrders() });
-});
-
-app.get('/api/admin/settings', (req, res) => {
-  res.json({ success: true, data: getSettings() });
-});
-
-app.post('/api/admin/settings', (req, res) => {
-  try {
-    const updated = updateSettings(req.body);
-    res.json({ success: true, message: 'Pengaturan berhasil disimpan', data: updated });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-});
-
-// Manual test trigger to simulate payment & test ANFU fulfillment
-app.post('/api/admin/orders/:id/simulate-pay', async (req, res) => {
-  try {
-    const order = db.getOrderById(req.params.id);
-    if (!order) return res.status(404).json({ success: false, message: 'Order tidak ditemukan' });
-
-    await executeFulfillment(order);
-    const updated = db.getOrderById(order.id);
-    res.json({ success: true, message: 'Simulasi pembayaran & fulfillment berhasil dieksekusi', data: updated });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-});
-
-// ==========================================
-// 5. PRODUCTION STATIC FILES
+// 4. PRODUCTION STATIC FILES
 // ==========================================
 const path = require('path');
 const fs = require('fs');

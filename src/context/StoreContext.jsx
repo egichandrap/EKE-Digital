@@ -25,7 +25,6 @@ export function StoreProvider({ children }) {
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isTrackingOpen, setIsTrackingOpen] = useState(false);
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
 
   // Active Order State
   const [activeOrder, setActiveOrder] = useState(null);
@@ -167,8 +166,6 @@ export function StoreProvider({ children }) {
         setIsSuccessOpen,
         isTrackingOpen,
         setIsTrackingOpen,
-        isAdminOpen,
-        setIsAdminOpen,
         activeOrder,
         setActiveOrder,
         isSubmittingOrder,

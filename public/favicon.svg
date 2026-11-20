@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="ekeBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9e1a00" />
+      <stop offset="35%" stop-color="#b22204" />
+      <stop offset="70%" stop-color="#df3a1b" />
+      <stop offset="100%" stop-color="#f86c52" />
+    </linearGradient>
+
+    <!-- Gloss Top Highlight -->
+    <linearGradient id="glossGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.32" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0" />
+    </linearGradient>
+
+    <!-- Glyph Drop Shadow -->
+    <filter id="glyphShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#4a0800" flood-opacity="0.38" />
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.18" />
+    </filter>
+
+    <!-- Gold Energy Glow -->
+    <linearGradient id="lightningGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="60%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#fff0eb" />
+    </linearGradient>
+
+    <linearGradient id="amberSpark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffd54f" />
+      <stop offset="100%" stop-color="#ffb300" />
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Squircle with Rich Gradient -->
+  <rect x="20" y="20" width="472" height="472" rx="124" fill="url(#ekeBg)" />
+
+  <!-- Inner Ambient Glow Ring -->
+  <rect x="28" y="28" width="456" height="456" rx="116" fill="none" stroke="#ffffff" stroke-width="4" stroke-opacity="0.22" />
+
+  <!-- Top Glass Highlight -->
+  <path d="M 20 144 C 20 75 75 20 144 20 L 368 20 C 437 20 492 75 492 144 L 492 210 C 370 250 140 240 20 180 Z" fill="url(#glossGrad)" />
+
+  <!-- The EKE Digital Master Emblem: Monogram "E" fused with Electric Speed Bolt -->
+  <g filter="url(#glyphShadow)">
+    
+    <!-- Top Horizontal Wing of 'E' -->
+    <path d="M 136 128 C 136 117 145 108 156 108 L 336 108 C 354 108 368 122 366 140 L 362 158 C 358 174 344 186 328 186 L 198 186 C 187 186 178 195 178 206 L 178 210 L 136 210 Z" fill="url(#lightningGrad)" />
+
+    <!-- Bottom Horizontal Wing of 'E' -->
+    <path d="M 136 302 L 178 302 L 178 306 C 178 317 187 326 198 326 L 336 326 C 352 326 366 338 370 354 L 374 372 C 376 390 362 404 344 404 L 156 404 C 145 404 136 395 136 384 Z" fill="url(#lightningGrad)" />
+
+    <!-- Vertical Spine (Connecting Left Pillar) -->
+    <rect x="136" y="128" width="56" height="256" rx="20" fill="url(#lightningGrad)" />
+
+    <!-- Center Lightning Spear (The Energy Pulse of 'E') -->
+    <polygon points="174,212 334,212 284,264 366,264 220,358 248,284 174,284" fill="url(#lightningGrad)" />
+
+    <!-- Dynamic Amber Energy Core inside the Bolt -->
+    <polygon points="204,226 306,226 270,260 334,260 236,326 254,274 204,274" fill="url(#amberSpark)" />
+
+  </g>
+
+  <!-- Futuristic Corner Dots / Digital Nodes -->
+  <circle cx="92" cy="92" r="8" fill="#ffffff" opacity="0.3" />
+  <circle cx="420" cy="420" r="8" fill="#ffffff" opacity="0.3" />
+  <circle cx="420" cy="92" r="6" fill="#ffffff" opacity="0.2" />
+  <circle cx="92" cy="420" r="6" fill="#ffffff" opacity="0.2" />
+</svg>

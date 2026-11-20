@@ -13,8 +13,12 @@ export default function Footer() {
           {/* Brand info */}
           <div className="md:col-span-2 space-y-3.5">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-[#b22204] via-[#e04225] to-[#f87258] flex items-center justify-center text-white shadow-md shadow-[#b22204]/20">
-                <span className="material-symbols-outlined text-[20px]">bolt</span>
+              <div className="w-9 h-9 rounded-2xl overflow-hidden shadow-md shadow-[#b22204]/20 shrink-0">
+                <img
+                  src="/logo.svg"
+                  alt="EKE Digital Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="text-xl font-black tracking-tight text-[#111c2d]">
                 {settings.storeName || 'EKE Digital'}

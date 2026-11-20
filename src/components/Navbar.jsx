@@ -20,8 +20,12 @@ export default function Navbar() {
           {/* Brand Logo */}
           <div className="flex items-center gap-3 shrink-0">
             <a href="/" className="flex items-center gap-2.5 group">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#b22204] via-[#e04225] to-[#f87258] flex items-center justify-center text-white shadow-md shadow-[#b22204]/25 group-hover:scale-105 group-hover:rotate-1 transition-all duration-300">
-                <span className="material-symbols-outlined text-[24px]">bolt</span>
+              <div className="w-10 h-10 rounded-2xl overflow-hidden shadow-md shadow-[#b22204]/25 group-hover:scale-105 group-hover:rotate-1 transition-all duration-300 shrink-0">
+                <img
+                  src="/logo.svg"
+                  alt="EKE Digital Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatRupiah } from '../utils/formatters';
 import { useStore } from '../context/StoreContext';
-import { Star, ShieldCheck, Zap } from 'lucide-react';
+import { Star, Zap, Eye, CheckCircle2 } from 'lucide-react';
 
 export default function ProductCard({ product }) {
   const { openProductDetail, startCheckout } = useStore();
@@ -13,9 +13,9 @@ export default function ProductCard({ product }) {
     : null;
 
   return (
-    <div className="group bg-white rounded-2xl border border-[#f0f3ff] hover:border-[#ffdad3] shadow-xs hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden hover:-translate-y-1">
+    <div className="group bg-white rounded-3xl border border-slate-200/70 hover:border-[#ffdad3] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden hover:-translate-y-1.5">
       
-      {/* Product Image & Badges */}
+      {/* Product Image & Badges Container */}
       <div
         onClick={() => openProductDetail(product)}
         className="relative aspect-video w-full bg-slate-100 overflow-hidden cursor-pointer"
@@ -23,90 +23,101 @@ export default function ProductCard({ product }) {
         <img
           src={product.image}
           alt={product.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
           loading="lazy"
           onError={(e) => {
             e.target.src = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80';
           }}
         />
 
-        {/* Top Badges */}
-        <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5">
+        {/* Gradient vignette */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+        {/* Top Floating Badges */}
+        <div className="absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
           {product.badge && (
-            <span className="px-2.5 py-1 rounded-lg bg-[#b22204] text-white text-[10px] font-black tracking-wider uppercase shadow-xs">
+            <span className="px-2.5 py-1 rounded-xl bg-gradient-to-r from-[#b22204] to-[#e04225] text-white text-[10px] font-black tracking-wider uppercase shadow-xs">
               {product.badge}
             </span>
           )}
           {product.discountPercentage > 0 && (
-            <span className="px-2 py-1 rounded-lg bg-[#006e2e] text-white text-[10px] font-extrabold shadow-xs">
+            <span className="px-2.5 py-1 rounded-xl bg-emerald-600 text-white text-[10px] font-black shadow-xs">
               Hemat {product.discountPercentage}%
             </span>
           )}
         </div>
 
-        {/* Category Pill overlay */}
-        <div className="absolute bottom-2.5 right-2.5">
-          <span className="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-xs text-white text-[10px] font-semibold">
+        {/* Category Pill Floating */}
+        <div className="absolute bottom-3 right-3">
+          <span className="px-2.5 py-1 rounded-xl bg-black/60 backdrop-blur-md text-white text-[10px] font-bold shadow-xs">
             {product.categoryLabel || product.category}
           </span>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="p-4 flex-1 flex flex-col justify-between">
+      {/* Product Body Content */}
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-4">
         <div>
           {/* Rating & Sold count */}
-          <div className="flex items-center gap-2 mb-1.5 text-xs">
-            <div className="flex items-center text-amber-500 font-bold">
-              <Star className="w-3.5 h-3.5 fill-amber-500 mr-0.5" />
+          <div className="flex items-center gap-2 mb-2 text-xs">
+            <div className="flex items-center text-amber-500 font-extrabold bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200/60">
+              <Star className="w-3.5 h-3.5 fill-amber-500 mr-1" />
               <span>{product.rating || 5}.0</span>
             </div>
-            <span className="text-[#8f7069]">•</span>
-            <span className="text-[#8f7069] text-[11px] font-medium">
+            <span className="text-slate-300">•</span>
+            <span className="text-slate-500 text-[11px] font-bold">
               {product.soldCount || '100+ terjual'}
+            </span>
+            <span className="text-slate-300">•</span>
+            <span className="text-emerald-700 text-[11px] font-bold flex items-center gap-0.5">
+              <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+              <span>Ready</span>
             </span>
           </div>
 
           {/* Title */}
           <h3
             onClick={() => openProductDetail(product)}
-            className="text-sm font-black text-[#111c2d] line-clamp-1 group-hover:text-[#b22204] transition-colors cursor-pointer"
+            className="text-sm sm:text-base font-black text-[#111c2d] line-clamp-1 group-hover:text-[#b22204] transition-colors cursor-pointer"
             title={product.title}
           >
             {product.title}
           </h3>
 
-          {/* Subtitle / preview */}
-          <p className="text-xs text-[#5b403b] line-clamp-2 mt-1 leading-snug font-normal">
+          {/* Subtitle / preview snippet */}
+          <p className="text-xs text-slate-500 line-clamp-2 mt-1.5 leading-relaxed font-normal">
             {product.subtitle || product.description}
           </p>
         </div>
 
-        {/* Price & Actions */}
-        <div className="mt-4 pt-3 border-t border-[#f0f3ff]">
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-base font-black text-[#b22204]">
+        {/* Price & Action Area */}
+        <div className="pt-3 border-t border-slate-100">
+          <div className="flex items-baseline gap-2 mb-3">
+            <span className="text-lg sm:text-xl font-black text-[#b22204]">
               {formattedPrice}
             </span>
             {formattedOriginal && (
-              <span className="text-xs text-[#8f7069] line-through">
+              <span className="text-xs text-slate-400 line-through font-medium">
                 {formattedOriginal}
               </span>
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-2 mt-3">
+          {/* Dual Action Buttons */}
+          <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => openProductDetail(product)}
-              className="w-full py-2 px-2.5 rounded-xl bg-[#f0f3ff] hover:bg-[#dee8ff] text-[#111c2d] text-xs font-bold transition-all text-center cursor-pointer active:scale-95"
+              className="w-full py-2.5 px-3 rounded-2xl bg-slate-100/90 hover:bg-slate-200/80 text-[#111c2d] text-xs font-bold transition-all text-center cursor-pointer active:scale-95 flex items-center justify-center gap-1.5"
             >
-              Lihat Detail
+              <Eye className="w-3.5 h-3.5 text-slate-600" />
+              <span>Detail</span>
             </button>
             <button
               onClick={() => startCheckout(product, 'personal')}
-              className="w-full py-2 px-2.5 rounded-xl bg-[#b22204] hover:bg-[#941901] text-white text-xs font-extrabold transition-all shadow-xs shadow-[#b22204]/20 text-center cursor-pointer active:scale-95"
+              className="w-full py-2.5 px-3 rounded-2xl bg-gradient-to-r from-[#b22204] to-[#e04225] hover:from-[#941901] hover:to-[#b22204] text-white text-xs font-black transition-all shadow-md shadow-[#b22204]/20 text-center cursor-pointer active:scale-95 flex items-center justify-center gap-1.5"
             >
-              Beli Sekarang
+              <Zap className="w-3.5 h-3.5 fill-white" />
+              <span>Beli Cepat</span>
             </button>
           </div>
         </div>

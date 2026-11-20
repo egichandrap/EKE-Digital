@@ -10,7 +10,7 @@ import PaymentModal from './components/PaymentModal';
 import SuccessModal from './components/SuccessModal';
 import OrderTrackingModal from './components/OrderTrackingModal';
 import Footer from './components/Footer';
-import { AlertCircle, RefreshCw, Sparkles, CheckCircle2 } from 'lucide-react';
+import { AlertCircle, RefreshCw, CheckCircle2 } from 'lucide-react';
 
 function StoreApp() {
   const {
@@ -40,17 +40,17 @@ function StoreApp() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-[#111c2d]">
+    <div className="min-h-screen flex flex-col bg-[#faf9f6] text-[#0f172a]">
       
       {/* Toast Notification Popup */}
       {toast.show && (
         <div className="fixed bottom-6 right-6 z-50 animate-fade-in pointer-events-none">
-          <div className={`px-4 py-3 rounded-2xl shadow-2xl text-xs font-black flex items-center gap-2 border pointer-events-auto ${
+          <div className={`px-4 py-3 rounded-2xl shadow-xl text-xs font-black flex items-center gap-2 border pointer-events-auto ${
             toast.type === 'error'
-              ? 'bg-rose-600 text-white border-rose-700 shadow-rose-600/30'
+              ? 'bg-rose-600 text-white border-rose-700 shadow-rose-600/25'
               : toast.type === 'success'
-              ? 'bg-emerald-600 text-white border-emerald-700 shadow-emerald-600/30'
-              : 'bg-slate-900 text-white border-slate-800 shadow-slate-900/30'
+              ? 'bg-[#10b981] text-white border-emerald-600 shadow-emerald-500/25'
+              : 'bg-[#0f172a] text-white border-slate-800 shadow-slate-900/25'
           }`}>
             <CheckCircle2 className="w-4 h-4 shrink-0" />
             <span>{toast.message}</span>
@@ -73,10 +73,10 @@ function StoreApp() {
         {/* Section Heading & Counter */}
         <div className="px-4 sm:px-6 lg:px-8 pt-6 pb-3 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <h2 className="text-lg sm:text-2xl font-black text-[#111c2d] tracking-tight">
-              {searchQuery ? `Hasil Pencarian: "${searchQuery}"` : 'Koleksi Produk & Lisensi Resmi'}
+            <h2 className="text-lg sm:text-2xl font-black text-[#0f172a] tracking-tight">
+              {searchQuery ? `Hasil Pencarian: "${searchQuery}"` : 'Katalog Pilihan & Lisensi Resmi'}
             </h2>
-            <span className="px-2.5 py-1 rounded-full bg-slate-200/70 text-[11px] font-black text-slate-700">
+            <span className="px-2.5 py-1 rounded-full bg-peach-100 text-[11px] font-black text-peach-800 border border-peach-200/60">
               {filteredProducts.length} Produk
             </span>
           </div>
@@ -84,7 +84,7 @@ function StoreApp() {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="text-xs font-bold text-[#b22204] hover:underline cursor-pointer"
+              className="text-xs font-bold text-peach-600 hover:text-peach-700 hover:underline cursor-pointer"
             >
               Reset Filter
             </button>
@@ -94,7 +94,7 @@ function StoreApp() {
         {/* Loading State */}
         {loading && (
           <div className="py-24 flex flex-col items-center justify-center gap-3">
-            <span className="w-9 h-9 border-3 border-[#b22204] border-t-transparent rounded-full animate-spin"></span>
+            <span className="w-9 h-9 border-3 border-peach-500 border-t-transparent rounded-full animate-spin"></span>
             <p className="text-xs font-bold text-slate-500">
               Sinkronisasi katalog produk dari server upstream...
             </p>
@@ -120,11 +120,11 @@ function StoreApp() {
         {!loading && !error && (
           <div className="px-4 sm:px-6 lg:px-8 py-3">
             {filteredProducts.length === 0 ? (
-              <div className="py-20 text-center rounded-3xl bg-white border border-slate-200/80 p-8 max-w-md mx-auto space-y-3 shadow-xs">
-                <span className="material-symbols-outlined text-5xl text-slate-300">
+              <div className="py-20 text-center rounded-3xl bg-white border border-stone-200/80 p-8 max-w-md mx-auto space-y-3 shadow-xs">
+                <span className="material-symbols-outlined text-5xl text-stone-300">
                   search_off
                 </span>
-                <h4 className="text-sm font-black text-[#111c2d]">
+                <h4 className="text-sm font-black text-[#0f172a]">
                   Tidak ada produk yang cocok
                 </h4>
                 <p className="text-xs text-slate-500 font-medium">
@@ -132,7 +132,7 @@ function StoreApp() {
                 </p>
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="py-2 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 transition-colors"
+                  className="py-2 px-4 rounded-xl bg-peach-50 hover:bg-peach-100 text-xs font-bold text-peach-700 border border-peach-200/80 transition-colors"
                 >
                   Tampilkan Semua Produk
                 </button>

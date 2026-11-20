@@ -24,20 +24,20 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom smooth scrollbar */
+/* Custom smooth scrollbar in peach & sage tones */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #f8f7f4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #ffdcd2;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b22204;
+  background: #ff9374;
 }
 
 /* Animations */
@@ -70,7 +70,7 @@
 
 /* Glassmorphism utility */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.90);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }

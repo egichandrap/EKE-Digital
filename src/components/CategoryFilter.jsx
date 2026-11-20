@@ -37,8 +37,8 @@ export default function CategoryFilter() {
               onClick={() => setSelectedCategory(cat.id)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer shrink-0 border select-none ${
                 isActive
-                  ? 'bg-gradient-to-r from-[#b22204] to-[#e04225] text-white border-transparent shadow-md shadow-[#b22204]/25 scale-[1.02]'
-                  : 'bg-white hover:bg-slate-100/80 text-slate-700 hover:text-[#111c2d] border-slate-200/80 shadow-2xs'
+                  ? 'bg-gradient-to-r from-peach-500 to-[#fa5f38] text-white border-transparent shadow-md shadow-peach-500/25 scale-[1.02]'
+                  : 'bg-white hover:bg-peach-50/60 text-slate-700 hover:text-peach-800 border-stone-200/80 shadow-2xs'
               }`}
             >
               <span className="material-symbols-outlined text-[18px]">
@@ -50,7 +50,7 @@ export default function CategoryFilter() {
                   className={`px-1.5 py-0.2 rounded-full text-[10px] font-black ${
                     isActive
                       ? 'bg-white/25 text-white'
-                      : 'bg-slate-100 text-slate-500'
+                      : 'bg-peach-50 text-peach-700 border border-peach-200/50'
                   }`}
                 >
                   {count}

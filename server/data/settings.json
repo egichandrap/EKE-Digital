@@ -1,0 +1,16 @@
+{
+  "storeName": "EKE Digital",
+  "tagline": "Pusat Produk Digital & Lisensi Terpercaya #1",
+  "waNumber": "6289604236160",
+  "markupPercent": 35,
+  "anfuBaseUrl": "https://api.anfu.web.id/api",
+  "anfuToken": "",
+  "autogopayBaseUrl": "https://v1-gateway.autogopay.site",
+  "autogopayApiKey": "",
+  "autoFulfillToAnfu": true,
+  "simulatePaymentMode": false,
+  "octoCrmUrl": "https://octo-crm-production-7dcfef0d.up.railway.app",
+  "octoCrmWorkspaceId": "0c700000-0000-0000-0000-000000000000",
+  "octoCrmApiKey": "",
+  "enableOctoCrmSync": true
+}

@@ -156,6 +156,15 @@ app.post('/api/orders', async (req, res) => {
 
     db.createOrder(newOrder);
 
+    // Sync pending order to OCTO-CRM in background for follow-up reminder
+    octoCrmService.syncPendingCheckout(newOrder).then(result => {
+      if (result.success && result.data) {
+        db.updateOrder(newOrder.id, { octoCrmLead: result.data });
+      }
+    }).catch(err => {
+      console.warn('[OCTO-CRM] Pending sync error:', err.message);
+    });
+
     res.json({
       success: true,
       message: 'Pesanan berhasil dibuat. Silakan selesaikan pembayaran QRIS.',
@@ -312,9 +321,9 @@ async function executeFulfillment(order) {
 
     console.log(`[Fulfillment] Pesanan ${order.id} SELESAI & LENGKAP.`);
 
-    // 3. Sync to OCTO-CRM (Contacts & Deals Pipeline)
+    // 3. Sync to OCTO-CRM as completed order
     const completedOrder = db.getOrderById(order.id);
-    octoCrmService.syncOrderToOctoCrm(completedOrder).catch(err => {
+    octoCrmService.syncCompletedOrder(completedOrder).catch(err => {
       console.warn('[OCTO-CRM] Background sync error:', err.message);
     });
   } catch (err) {
